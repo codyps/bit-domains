@@ -1,7 +1,4 @@
-#![no_std]
 
-//!
-//! 
 //! # "Znum"
 //!
 //!  - "Abstract Domains for Bit-Level Machine Integer and Floating-point Operations"
@@ -22,12 +19,3 @@
 //!  - http://bitmath.blogspot.com/2014/02/addition-in-bitfield-domain-alternative.html
 //!  - "Abstract Domains for Bit-Level Machine Integer and Floating-point Operations"
 //!  - https://www.omnimaga.org/other-computer-languages-help/addition-in-the-bitfield-domain/
-
-pub mod znum;
-pub use znum::Znum;
-
-pub mod tnum;
-pub use tnum::Tnum;
-
-pub mod rnum;
-pub use rnum::Rnum;

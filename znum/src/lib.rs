@@ -1,4 +1,4 @@
-use core::ops::{Add,Sub,Mul,Rem,Div,Shl,Shr,BitXor,BitOr,BitAnd,Not};
+use core::ops::{Add, BitAnd, BitOr, BitXor, Div, Mul, Not, Rem, Shl, Shr, Sub};
 
 /// Tracks which bits "may be 1s" (o) and "may be 0s" (z)
 ///
@@ -7,7 +7,7 @@ use core::ops::{Add,Sub,Mul,Rem,Div,Shl,Shr,BitXor,BitOr,BitAnd,Not};
 ///
 ///  - "Abstract Domains for Bit-Level Machine Integer and Floating-point Operations"
 ///    https://www-apr.lip6.fr/~mine/publi/article-mine-wing12.pdf
-#[derive(Debug, Eq, PartialEq,Clone,Copy)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy)]
 pub struct Znum {
     z: u64,
     o: u64,
@@ -15,10 +15,7 @@ pub struct Znum {
 
 impl Znum {
     pub fn from_parts(ones: u64, zeros: u64) -> Self {
-        Znum {
-            o: ones,
-            z: zeros,
-        }
+        Znum { o: ones, z: zeros }
     }
 
     /// From a value, generate a Znum
@@ -26,10 +23,7 @@ impl Znum {
     /// The resulting Znum only contains the provided value `v`, and no other values. It is
     /// considered a "constant"
     pub fn from_value(v: u64) -> Self {
-        Znum {
-            o: v,
-            z: !v,
-        }
+        Znum { o: v, z: !v }
     }
 
     /// Is there only a single contained value?
@@ -113,8 +107,7 @@ impl Znum {
 
 impl BitOr for Znum {
     type Output = Znum;
-    fn bitor(self, other: Self) -> Self
-    {
+    fn bitor(self, other: Self) -> Self {
         Self {
             z: self.z & other.z,
             o: self.o | other.o,
@@ -124,8 +117,7 @@ impl BitOr for Znum {
 
 impl BitAnd for Znum {
     type Output = Znum;
-    fn bitand(self, other: Self) -> Self
-    {
+    fn bitand(self, other: Self) -> Self {
         Self {
             z: self.z | other.z,
             o: self.o & other.o,
@@ -135,8 +127,7 @@ impl BitAnd for Znum {
 
 impl BitXor for Znum {
     type Output = Znum;
-    fn bitxor(self, other: Self) -> Self
-    {
+    fn bitxor(self, other: Self) -> Self {
         Self {
             z: (self.z & other.z) | (self.o & other.o),
             o: (self.z & other.o) | (self.o & other.z),
@@ -230,7 +221,6 @@ impl Add for Znum {
     }
 }
 */
-
 
 /*
 impl Sub for Znum {

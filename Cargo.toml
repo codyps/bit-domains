@@ -1,7 +1,4 @@
-[package]
-name = "bit-domains"
-version = "0.1.0"
-authors = ["Cody P Schafer <dev@codyps.com>"]
-
-[dependencies]
-quickcheck = "0.9"
+[workspace]
+members = [
+	"znum", "tnum", "rnum"
+]
