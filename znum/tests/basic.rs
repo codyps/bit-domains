@@ -1,7 +1,5 @@
-extern crate bit_domains;
-extern crate quickcheck;
-use bit_domains::Znum;
-use quickcheck::{quickcheck};
+use quickcheck::quickcheck;
+use znum::Znum;
 
 /*
 use std::ops;
@@ -72,14 +70,26 @@ fn const_is_defined() {
 
 #[test]
 fn instance_is_defined() {
-    assert_eq!(Znum::from_parts(0,0).is_defined(), false);
-    assert_eq!(Znum::from_parts(0,1).is_defined(), false);
-    assert_eq!(Znum::from_parts(1,1).is_defined(), false);
-    assert_eq!(Znum::from_parts(1,0).is_defined(), false);
-    assert_eq!(Znum::from_parts(0xfffffffffffffffe,0xfffffffffffffffe).is_defined(), false);
-    assert_eq!(Znum::from_parts(0xfffffffffffffffe,0xffffffffffffffff).is_defined(), true);
-    assert_eq!(Znum::from_parts(0xffffffffffffffff,0xfffffffffffffffe).is_defined(), true);
-    assert_eq!(Znum::from_parts(0xffffffffffffffff,0xffffffffffffffff).is_defined(), true);
+    assert_eq!(Znum::from_parts(0, 0).is_defined(), false);
+    assert_eq!(Znum::from_parts(0, 1).is_defined(), false);
+    assert_eq!(Znum::from_parts(1, 1).is_defined(), false);
+    assert_eq!(Znum::from_parts(1, 0).is_defined(), false);
+    assert_eq!(
+        Znum::from_parts(0xfffffffffffffffe, 0xfffffffffffffffe).is_defined(),
+        false
+    );
+    assert_eq!(
+        Znum::from_parts(0xfffffffffffffffe, 0xffffffffffffffff).is_defined(),
+        true
+    );
+    assert_eq!(
+        Znum::from_parts(0xffffffffffffffff, 0xfffffffffffffffe).is_defined(),
+        true
+    );
+    assert_eq!(
+        Znum::from_parts(0xffffffffffffffff, 0xffffffffffffffff).is_defined(),
+        true
+    );
 }
 
 #[test]
@@ -92,7 +102,7 @@ fn const_bitor_is_value() {
         c.value() == Some(x | y)
     }
 
-    quickcheck(prop as fn(u64,u64) -> bool);
+    quickcheck(prop as fn(u64, u64) -> bool);
 }
 
 #[test]
@@ -104,7 +114,7 @@ fn const_bitand_is_value() {
         let c = a & b;
         c.value() == Some(x & y)
     }
-    quickcheck(prop as fn(u64,u64) -> bool);
+    quickcheck(prop as fn(u64, u64) -> bool);
 }
 
 #[test]
@@ -116,7 +126,7 @@ fn const_xor_is_value() {
         let c = a ^ b;
         c.value() == Some(x ^ y)
     }
-    quickcheck(prop as fn(u64,u64) -> bool);
+    quickcheck(prop as fn(u64, u64) -> bool);
 }
 
 #[test]
@@ -128,7 +138,7 @@ fn const_shl_is_value() {
         let c = a << y;
         c.value() == Some(x << y)
     }
-    quickcheck(prop as fn(u64,u8) -> bool);
+    quickcheck(prop as fn(u64, u8) -> bool);
 }
 
 #[test]
@@ -140,7 +150,7 @@ fn const_shr_is_value() {
         let c = a >> y;
         c.value() == Some(x >> y)
     }
-    quickcheck(prop as fn(u64,u8) -> bool);
+    quickcheck(prop as fn(u64, u8) -> bool);
 }
 
 #[test]
@@ -161,8 +171,7 @@ fn union_2_const_contains_2() {
 
         let c = a.union(b);
 
-        c == b.union(a) &&
-            c.contains_value(x) && c.contains_value(y)
+        c == b.union(a) && c.contains_value(x) && c.contains_value(y)
     }
 
     quickcheck(prop as fn(u64, u64) -> bool);
@@ -216,11 +225,11 @@ fn union_3_const_contains_2_differing() {
         let ca = p.contains(m) && p.contains(n) && p.contains(o);
         let cd = !m.contains(c) && !n.contains(a) && !o.contains(b);
         let cb = {
-            !m.contains(n) && !m.contains(o) 
+            !m.contains(n) && !m.contains(o)
             && !n.contains(o) && !n.contains(m)
             && !o.contains(m) && !o.contains(n)
         };
-        let cc = !m.contains(n) && !m.contains(o) 
+        let cc = !m.contains(n) && !m.contains(o)
             && !n.contains(o) && !n.contains(m)
             && !o.contains(m) && !o.contains(n);
 
