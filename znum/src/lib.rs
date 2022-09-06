@@ -5,8 +5,7 @@ use core::ops::{Add, BitAnd, BitOr, BitXor, Div, Mul, Not, Rem, Shl, Shr, Sub};
 /// Compared to other bit domains, the Z domain requires minimal storage, which is not scaled with
 /// the number of operations, but as a result the accuracy of the domain is somewhat limited.
 ///
-///  - "Abstract Domains for Bit-Level Machine Integer and Floating-point Operations"
-///    https://www-apr.lip6.fr/~mine/publi/article-mine-wing12.pdf
+///  - ["Abstract Domains for Bit-Level Machine Integer and Floating-point Operations"](https://www-apr.lip6.fr/~mine/publi/article-mine-wing12.pdf)
 #[derive(Debug, Eq, PartialEq, Clone, Copy)]
 pub struct Znum {
     z: u64,
@@ -91,16 +90,24 @@ impl Znum {
         }
     }
 
+    pub fn max_value(&self) -> u64 {
+        self.o
+    }
+
+    pub fn min_value(&self) -> u64 {
+        self.o & !(self.z)
+    }
+
     /*
     /// All elements in `other` are also elements in `self`
     pub fn is_subset(&self, other: Self) -> bool {
-
+        todo!()
     }
     */
 
     /*
-    fn from_range(low: u64, high: u64) -> Self {
-
+    pub fn from_range(low: u64, high: u64) -> Self {
+        todo!()
     }
     */
 }
@@ -202,7 +209,6 @@ impl Add for Znum {
          * 1 1 1 1 1 1
          */
 
-
         /*
          * +1:
          *   o: self.o + 1 | ((self.o ^ self.z) & 1)
@@ -214,10 +220,12 @@ impl Add for Znum {
          *   o
          */
 
-
+        /*
         Self {
             o: self.o + other.o,
         }
+        */
+
     }
 }
 */
