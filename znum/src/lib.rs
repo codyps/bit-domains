@@ -90,12 +90,24 @@ impl Znum {
         }
     }
 
-    pub fn max_value(&self) -> u64 {
-        self.o
+    pub fn has_value(&self) -> bool {
+        !(self.o | self.z) == 0
     }
 
-    pub fn min_value(&self) -> u64 {
-        self.o & !(self.z)
+    pub fn max_value(&self) -> Option<u64> {
+        if self.has_value() {
+            Some(self.o)
+        } else {
+            None
+        }
+    }
+
+    pub fn min_value(&self) -> Option<u64> {
+        if self.has_value() {
+            Some(self.o & !(self.z))
+        } else {
+            None
+        }
     }
 
     /*

@@ -260,7 +260,11 @@ fn intersect_2_non_const() {
 fn min_value_is_valid() {
     fn prop(o: u64, z: u64) -> bool {
         let a = Znum::from_parts(o, z);
-        a.contains_value(a.min_value())
+        if let Some(min_value) = a.min_value() {
+            a.contains_value(min_value)
+        } else {
+            true
+        }
     }
 
     quickcheck(prop as fn(u64, u64) -> bool);
